@@ -1,4 +1,4 @@
-# Praktikum PO9 : Sampling Distribution dan Estimasi 
+#  Sampling Distribution dan Estimasi 
 
 ## Pendahuluan
 
@@ -577,6 +577,8 @@ sigma_k / sqrt(n_k)
 
 **Jawaban**: SE = 6/6 = 1 gram. Rata-rata dari 36 kemasan biasanya meleset sekitar 1 gram dari rata-rata sebenarnya -- jauh lebih kecil daripada variasi berat antarkemasan (6 gram).
 
+interpretasi saya : SE = 1 gram artinya rata-rata dari 36 kemasan biasanya meleset sekitar 1 gram dari rata-rata sebenarnya (μ). Ini jauh lebih kecil daripada variasi berat antarkemasan (σ = 6 gram), sehingga rata-rata sampel merupakan penduga μ yang presisi.
+
 #### Tugas 2: Jika mesin bekerja benar ($\mu$ = 250), berapa peluang rata-rata 36 kemasan kurang dari 248 gram?
 
 ```{r}
@@ -585,12 +587,15 @@ pnorm(248, mean = 250, sd = sigma_k / sqrt(n_k))
 
 **Jawaban**: $z = (248 - 250)/1 = -2$, sehingga peluangnya sekitar 0,0228. Kejadian ini jarang jika mesin bekerja benar -- gagasan yang menjadi dasar uji hipotesis di Pertemuan 10.
 
+interpretasi saya : Menurut saya, hasil ini menunjukkan bahwa peluang rata-rata 36 kemasan kurang dari 248 gram itu kecil, yaitu sekitar 0,0228 atau 2,3%, jika mesin memang bekerja benar (μ = 250). Karena SE hanya 1 gram, selisih 2 gram sudah setara dengan 2 SE di bawah rata-rata, sehingga kejadian seperti ini tergolong jarang. Jadi, kalau di lapangan ternyata rata-rata sampel benar-benar di bawah 248 gram, menurut saya wajar untuk mencurigai bahwa mesin tidak bekerja sebagaimana mestinya. Cara berpikir inilah yang nanti menjadi dasar uji hipotesis di Pertemuan 10.
+
 #### Tugas 3: Hitung CI 95% untuk rata-rata berat ($\sigma$ diketahui)
 
 ```{r}
 ci_z <- mean(berat) + c(-1, 1) * qnorm(0.975) * sigma_k / sqrt(n_k)
 round(c(x_bar = mean(berat), Bawah = ci_z[1], Atas = ci_z[2]), 2)
 ```
+interpretasi saya : Menurut saya, dengan tingkat kepercayaan 95%, rata-rata berat sebenarnya (μ) berada di antara 245,44 dan 249,36 gram, dengan rata-rata sampel 247,40 gram. Karena nilai 250 gram tidak termasuk dalam interval ini, ada alasan untuk menduga mesin tidak bekerja sesuai target 250 gram.
 
 #### Tugas 4: Hitung CI 95% jika $\sigma$ dianggap tidak diketahui (t)
 
@@ -598,10 +603,13 @@ round(c(x_bar = mean(berat), Bawah = ci_z[1], Atas = ci_z[2]), 2)
 round(t.test(berat)$conf.int, 2)
 round(c(s = sd(berat), t_kritis = qt(0.975, 35), z_kritis = qnorm(0.975)), 3)
 ```
+interpretasi saya : Menurut saya, CI 95% dengan t adalah 245,25 sampai 249,56 gram, sedikit lebih lebar daripada CI dengan z karena s (6,366) lebih besar dari σ (6) dan nilai kritis t (2,030) lebih besar dari z (1,960). Karena 250 tetap di luar interval, kesimpulannya tidak berubah: mesin kemungkinan tidak bekerja sesuai target.
 
 #### Tugas 5: Tafsirkan hasilnya
 
 **Jawaban**: Selang z dan selang t sangat mirip karena $n$ = 36 cukup besar (t kritis hanya sedikit di atas 1,96) dan $s$ dekat dengan $\sigma$. Jika nilai 250 **tidak** berada di dalam selang, data memberi indikasi bahwa rata-rata pengisian mesin berbeda dari target -- yang dapat dikonfirmasi dengan uji hipotesis. Hasil sampel ini: 250 berada di luar selang z.
+
+interpretasi saya : Menurut saya, selang z (245,44 sampai 249,36) dan selang t (245,25 sampai 249,56) sangat mirip karena n = 36 cukup besar, sehingga nilai kritis t (2,030) hanya sedikit di atas z (1,960), dan s (6,366) dekat dengan σ (6). Karena 250 berada di luar kedua selang, data memberi indikasi bahwa rata-rata pengisian mesin berbeda dari target 250 gram. Dugaan ini masih perlu dikonfirmasi dengan uji hipotesis.
 
 #### Tugas 6 (Tantangan): Ukuran sampel
 
@@ -612,6 +620,8 @@ c(MoE_1 = n_mean(sigma = 6, E = 1), MoE_0.5 = n_mean(sigma = 6, E = 0.5))
 ```
 
 **Jawaban**: 139 kemasan untuk ± 1 gram dan 554 kemasan untuk ± 0,5 gram -- membagi dua margin of error membutuhkan sampel empat kali lipat.
+
+interpretasi saya : Menurut saya, agar margin of error CI 95% hanya ± 1 gram dibutuhkan n = (1,96 × 6 / 1)² = 138,3, dibulatkan ke atas menjadi 139 kemasan. Untuk ± 0,5 gram dibutuhkan n = (1,96 × 6 / 0,5)² = 553,2, dibulatkan menjadi 554 kemasan. Jadi membagi dua margin of error membutuhkan sampel sekitar empat kali lipat, karena n berbanding terbalik dengan kuadrat E.
 
 ### Latihan Tambahan (Self-Check)
 
@@ -624,6 +634,7 @@ Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada kom
 # Mean = 8; SE = 6 / sqrt(64) = 0.75; bentuk mendekati normal (CLT, n = 64)
 1 - pnorm(9, mean = 8, sd = 0.75)   # z = 1.33 -> sekitar 0.0912
 ```
+interpretasi saya : Menurut saya, distribusi sampling x̄ punya mean 8 menit, SE = 6/√64 = 0,75, dan bentuknya mendekati normal berkat CLT (n = 64). P(x̄ > 9) = P(Z > 1,33) ≈ 0,0912, jadi kejadian ini tidak terlalu jarang.
 
 **Soal B**. Survei 1.200 pemilih menunjukkan 54% mendukung sebuah kebijakan. Hitung CI 95% dan margin of error-nya.
 
@@ -633,6 +644,7 @@ p <- 0.54; n <- 1200
 moe <- qnorm(0.975) * sqrt(p * (1 - p) / n)   # 0.0282 -> ± 2.8 poin persentase
 p + c(-1, 1) * moe                            # 0.512 sampai 0.568
 ```
+interpretasi saya : Menurut saya, CI 95% untuk proporsi pendukung adalah 51,2% sampai 56,8% (MoE ±2,8 poin). Karena seluruh interval di atas 50%, ada indikasi dukungan mayoritas.
 
 **Soal C**. Sepuluh pengukuran pH air limbah: 6,8; 7,1; 6,9; 7,4; 7,0; 6,7; 7,2; 7,3; 6,9; 7,1. Hitung CI 95% untuk rata-rata pH secara manual dengan distribusi t lalu periksa dengan `t.test()`.
 
@@ -643,6 +655,7 @@ ph <- c(6.8, 7.1, 6.9, 7.4, 7.0, 6.7, 7.2, 7.3, 6.9, 7.1)
 mean(ph) + c(-1, 1) * qt(0.975, 9) * sd(ph) / sqrt(10)   # 6.885 sampai 7.195
 t.test(ph)$conf.int
 ```
+interpretasi saya : Menurut saya, x̄ = 7,04 dan CI 95% (t, df = 9) adalah 6,885 sampai 7,195. Kita memakai t karena σ tidak diketahui dan n kecil. Hasil t.test() akan sama dengan hitungan manual.
 
 **Soal D**. Sebuah media menulis: "Dengan CI 95% [62%, 68%], berarti 95% warga memiliki tingkat kepuasan antara 62% dan 68%." Perbaiki tafsiran ini.
 
@@ -652,6 +665,7 @@ t.test(ph)$conf.int
 # populasi berada antara 62% dan 68%." CI menaksir PARAMETER populasi (proporsi yang puas),
 # bukan rentang nilai individu.
 ```
+interpretasi saya : Menurut saya, tafsiran media itu keliru karena CI menaksir parameter populasi, bukan rentang nilai individu. Yang benar: "Kami 95% yakin proporsi warga yang puas di seluruh populasi berada antara 62% dan 68%."
 
 ## Kesalahan Umum dalam Sampling Distribution dan Estimasi
 
@@ -724,3 +738,14 @@ Materi ini merangkum topik distribusi sampling dan estimasi (*sampling distribut
 - Buku teks pengantar statistika pada bab *Sampling Distributions* dan *Confidence Interval Estimation*.
 - Efron, B., & Tibshirani, R. J. (1993). *An Introduction to the Bootstrap*. Chapman & Hall.
 - Dokumentasi resmi R: `?pnorm`, `?qnorm`, `?qt`, `?t.test`, `?replicate` (dapat diakses langsung di R/RStudio).
+
+## Interpretasi Pemahaman Pribadi 
+
+- **Satu sampel bukan angka pasti.** Sampel lain bakal kasih hasil yang beda, jadi hasil dari satu sampel itu cuma taksiran, bukan kebenaran mutlak.
+- **Rata-rata lebih stabil daripada individu.** Di simulasi, rata-rata dari 40 mahasiswa sebarannya jauh lebih sempit daripada data individunya, dan makin besar sampelnya makin stabil.
+- **Bentuknya jadi lonceng.** Walau populasinya miring ke kanan, rata-rata dari banyak sampel hampir berbentuk lonceng. Ini yang disebut CLT.
+- **QRIS: sekitar 66% UMKM sudah pakai.** Nilai sebenarnya kemungkinan ada di kisaran 60,1% sampai 71,9%.
+- **Transaksi: rata-rata sekitar Rp 553 ribu per hari.** Mediannya lebih rendah (Rp 472 ribu) karena ada segelintir UMKM besar yang menarik rata-rata ke atas.
+- **Arti "95%" di interval.** Bukan peluang nilai sebenarnya ada di interval itu, tapi soal cara bikinnya: kalau survei diulang terus, sekitar 95% intervalnya bakal kena nilai aslinya.
+- **Melaporkan angka saja nggak cukup.** Kita juga harus tahu seberapa jauh angka itu bisa meleset lewat SE dan CI.
+- **Sampel besar nggak nyembuhin bias.** Sampel yang banyak cuma memperkecil meleset yang acak, tapi kalau cara ambil sampelnya salah, hasilnya tetap meleset.

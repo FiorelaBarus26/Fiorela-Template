@@ -1,4 +1,4 @@
-# Praktikum P10 : Konsep dan Uji Hipotesis 
+#  Konsep dan Uji Hipotesis 
 
 ## Pendahuluan
 
@@ -57,7 +57,7 @@ Jika mesin benar ($\mu = 250$), maka menurut CLT $\bar{x} \sim N(250,\ 6/\sqrt{3
 
 ```{r}
 mu0 <- 250; sigma <- 6; n <- 36; xbar <- 247.6
-se <- sigma / sqrt(n)
+se  <- sigma / sqrt(n)
 
 set.seed(10)
 xbar_jika_H0 <- replicate(100000, mean(rnorm(n, mu0, sigma)))
@@ -219,24 +219,24 @@ Kita bungkus perhitungan uji z satu sampel dalam sebuah fungsi agar dapat dipaka
 ```{r}
 uji_z    <- function(xbar, mu0, sigma, n, arah = c("dua", "kanan", "kiri"), alpha = 0.05) {
   arah   <- match.arg(arah)
-  z <- (xbar - mu0) / (sigma / sqrt(n))
-  p <- switch(arah,
-              dua   = 2 * (1 - pnorm(abs(z))),
-              kanan = 1 - pnorm(z),
-              kiri  = pnorm(z))
+  z      <- (xbar - mu0) / (sigma / sqrt(n))
+  p      <- switch(arah,
+                   dua   = 2 * (1 - pnorm(abs(z))),
+                   kanan = 1 - pnorm(z),
+                   kiri  = pnorm(z))
   kritis <- switch(arah,
                    dua   = qnorm(1 - alpha / 2),
                    kanan = qnorm(1 - alpha),
                    kiri  = qnorm(alpha))
   data.frame(z = round(z, 4), z_kritis = round(kritis, 4), p_value = signif(p, 4),
-             keputusan = ifelse(p <= alpha, "Tolak H0", "Gagal menolak H0"))
+             keputusan   = ifelse(p <= alpha, "Tolak H0", "Gagal menolak H0"))
 }
 ```
 
 ### Contoh 1 (Dua Arah): Mesin Pengisi Kopi
 
 1. $H_0: \mu = 250$ gram (mesin tepat); $H_1: \mu \ne 250$ gram (mesin perlu dikalibrasi).
-2. $\alpha = 0{,}05$.
+2. $\alpha   = 0{,}05$.
 3. $\sigma$ diketahui (6 g), $n = 36$, uji z: $z = (247{,}6 - 250)/1 = -2{,}4$.
 
 ```{r}
@@ -320,9 +320,9 @@ Ketika $H_0$ benar, *p-value* tersebar **merata** antara 0 dan 1; sekitar 5% di 
 Sekarang anggap mesin **benar-benar** mengisi rata-rata 248 gram ($H_0$ salah). Seberapa sering uji kita mendeteksinya?
 
 ```{r}
-power_sim <- function(mu_benar, n, alpha = 0.05, B = 5000) {
+power_sim   <- function(mu_benar, n, alpha = 0.05, B = 5000) {
   mean(replicate(B, {
-    z     <- (mean(rnorm(n, mu_benar, 6)) - 250) / (6 / sqrt(n))
+    z       <- (mean(rnorm(n, mu_benar, 6)) - 250) / (6 / sqrt(n))
     2 * (1 - pnorm(abs(z))) <= alpha
   }))
 }
@@ -342,7 +342,7 @@ Dengan $n = 36$, uji hanya mendeteksi selisih 2 gram sekitar 52% dari waktu; sek
 ### Kurva Power: Faktor yang Memengaruhi
 
 ```{r}
-mu_seq <- seq(245, 255, by = 0.05)
+mu_seq    <- seq(245, 255, by = 0.05)
 plot(mu_seq, power_teori(mu_seq, 36), type = "l", lwd = 2, col = "#4C72B0",
      ylim = c(0, 1),
      xlab = "Rata-rata pengisian sebenarnya (gram)", ylab = "Power = P(tolak H0)",
@@ -351,7 +351,7 @@ lines(mu_seq, power_teori(mu_seq, 100), lwd = 2, col = "#DD8452")
 lines(mu_seq, power_teori(mu_seq, 36, alpha = 0.01), lwd = 2, lty = 2, col = "#4C72B0")
 abline(h = c(0.05, 0.8), lty = 3, col = "grey50")
 legend("top", bty = "n", lwd = 2, lty = c(1, 1, 2),
-       col = c("#4C72B0", "#DD8452", "#4C72B0"), cex = 0.8,
+       col    = c("#4C72B0", "#DD8452", "#4C72B0"), cex = 0.8,
        legend = c("n = 36, alpha = 0,05", "n = 100, alpha = 0,05",
                   "n = 36, alpha = 0,01"))
 ```
@@ -507,16 +507,21 @@ Lembaga konsumen curiga umur baterai **kurang** dari yang diklaim.
 
 **Jawaban**: $H_0: \mu \ge 20$ jam (klaim benar); $H_1: \mu < 20$ jam (klaim berlebihan). Uji satu arah kiri.
 
+interpretasi saya : Menurut saya, karena lembaga curiga umur baterai kurang dari klaim, H0: μ ≥ 20 jam (klaim benar) dan H1: μ < 20 jam (klaim berlebihan). Ini uji satu arah kiri, karena yang dicari hanya bukti bahwa umur baterai lebih pendek.
+
 #### Tugas 2: Hitung statistik uji, nilai kritis, dan p-value ($\alpha$ = 0,05)
 
 ```{r}
 hasil_lat <- uji_z(mean(umur), mu0 = 20, sigma = 2.5, n = 40, arah = "kiri")
 hasil_lat
 ```
+interpretasi saya : Menurut saya, z = -2,1251 lebih kecil daripada nilai kritis -1,6449, dan p-value = 0,01679 lebih kecil dari α = 0,05. Artinya, jika klaim 20 jam benar, rata-rata 40 baterai sekecil ini hanya muncul sekitar 1,7% dari waktu, sehingga H0 ditolak.
 
 #### Tugas 3: Ambil keputusan dan tuliskan kesimpulan dalam konteks
 
 **Jawaban**: statistik uji $z = -2{,}1251$ dengan p-value 0,01679. Karena p-value kurang dari 0,05, $H_0$ ditolak: terdapat bukti yang cukup bahwa rata-rata umur baterai kurang dari 20 jam seperti yang diklaim.
+
+interpretasi saya : Menurut saya, karena p-value (0,01679) < 0,05, H0 ditolak. Ada bukti yang cukup bahwa rata-rata umur baterai kurang dari 20 jam, jadi klaim produsen tampaknya berlebihan.
 
 #### Tugas 4: Bagaimana keputusannya jika $\alpha$ = 0,01?
 
@@ -526,9 +531,13 @@ uji_z(mean(umur), mu0 = 20, sigma = 2.5, n = 40, arah = "kiri", alpha = 0.01)
 
 **Jawaban**: pada $\alpha = 0{,}01$ nilai kritisnya $-2{,}326$, sehingga keputusannya menjadi *gagal menolak $H_0$*. Keputusan dapat berubah menurut $\alpha$ -- itulah sebabnya $\alpha$ harus ditetapkan **sebelum** melihat data, dan p-value sebaiknya dilaporkan apa adanya agar pembaca dapat menilai sendiri kekuatan buktinya.
 
+interpretasi saya : Menurut saya, pada α = 0,01 nilai kritisnya -2,326, sedangkan z = -2,1251 tidak melewatinya (p-value 0,01679 > 0,01), sehingga gagal menolak H0. Bukti yang sama bisa menghasilkan keputusan berbeda tergantung α, maka α harus ditetapkan sebelum melihat data. Gagal menolak H0 juga tidak berarti klaim terbukti benar, hanya buktinya belum cukup kuat.
+
 #### Tugas 5: Jelaskan kesalahan Tipe I dan II dalam konteks ini
 
 **Jawaban**: **Tipe I** -- lembaga menyatakan klaim produsen berlebihan padahal baterai sebenarnya bertahan rata-rata 20 jam (merugikan reputasi produsen). **Tipe II** -- lembaga menyatakan tidak ada bukti klaim berlebihan padahal baterai sebenarnya bertahan kurang dari 20 jam (merugikan konsumen).
+
+interpretasi saya : Menurut saya, Tipe I: lembaga menyatakan klaim berlebihan padahal baterai sebenarnya rata-rata 20 jam (merugikan produsen). Tipe II: lembaga menyatakan tidak ada bukti padahal baterai sebenarnya kurang dari 20 jam (merugikan konsumen).
 
 #### Tugas 6 (Tantangan): Power dan ukuran sampel
 
@@ -544,6 +553,8 @@ ceiling(((qnorm(0.95) + qnorm(0.90)) * 2.5 / 1)^2)   # n satu arah, power 90%
 
 **Jawaban**: dengan 40 unit, selisih 1 jam terdeteksi sekitar 81% dari waktu. Untuk power 90% dibutuhkan sekitar 54 unit.
 
+interpretasi saya : Menurut saya, dengan 40 unit, uji ini mendeteksi selisih 1 jam (μ = 19) sekitar 81% dari waktu (power = 0,812). Untuk power 90% dibutuhkan sekitar 54 unit.
+
 ### Latihan Tambahan (Self-Check)
 
 Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada komentar kode.
@@ -558,6 +569,7 @@ Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada kom
 #     Jika pemeriksa curiga kadar gula melebihi label: H0: mu <= 10 vs H1: mu > 10 (kanan).
 #     Rumusan bergantung pada klaim yang ingin dibuktikan.
 ```
+interpretasi saya : Menurut saya: (1) H0: μ = 200 ms vs H1: μ ≠ 200 ms (dua arah). (2) H0: μ ≤ 70 vs H1: μ > 70 (kanan). (3) Untuk membuktikan label benar: H0: μ ≥ 10 vs H1: μ < 10 (kiri); jika curiga gula melebihi label: H0: μ ≤ 10 vs H1: μ > 10 (kanan). Rumusan bergantung pada klaim yang ingin dibuktikan.
 
 **Soal B**. Uji dua arah menghasilkan $z = 1{,}80$. Hitung p-value dan keputusan pada $\alpha$ = 0,05 dan 0,10. Bagaimana jika ujinya satu arah kanan?
 
@@ -566,6 +578,7 @@ Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada kom
 2 * (1 - pnorm(1.80))   # 0.0719 -> gagal tolak (0.05), tolak (0.10)
 1 - pnorm(1.80)         # 0.0359 -> tolak pada 0.05 (jika arah kanan ditetapkan SEBELUM melihat data)
 ```
+interpretasi saya : Menurut saya, uji dua arah: p-value = 2 × (1 − Φ(1,80)) ≈ 0,0719, sehingga gagal menolak H0 pada α = 0,05 tetapi menolak H0 pada α = 0,10. Uji satu arah kanan: p-value ≈ 0,0359, sehingga menolak H0 pada α = 0,05, asalkan arah kanan ditetapkan sebelum melihat data.
 
 **Soal C**. Seorang analis melaporkan: "p-value = 0,23, jadi terbukti kampanye iklan tidak berpengaruh terhadap penjualan." Kritik pernyataan ini.
 
@@ -576,6 +589,7 @@ Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada kom
 # (sampel kecil). Laporkan selang kepercayaan besar efek untuk melihat rentang pengaruh
 # yang masih masuk akal.
 ```
+interpretasi saya : Menurut saya, pernyataan analis itu keliru. P-value 0,23 hanya berarti data belum cukup memberi bukti adanya pengaruh (gagal menolak H0), bukan bukti bahwa iklan tidak berpengaruh. Bisa jadi pengaruhnya kecil dan power uji rendah karena sampel kecil. Sebaiknya laporkan juga selang kepercayaan untuk besar efeknya.
 
 **Soal D**. Sebuah tim menguji 15 variasi warna tombol terhadap warna lama, masing-masing dengan $\alpha$ = 0,05, dan melaporkan satu variasi yang "signifikan" (p = 0,03). Berapa peluang setidaknya satu hasil signifikan jika sebenarnya tidak ada variasi yang lebih baik? Apakah temuan itu meyakinkan dengan koreksi Bonferroni?
 
@@ -584,6 +598,7 @@ Kerjakan soal-soal berikut secara mandiri sebelum melihat kunci jawaban pada kom
 1 - 0.95^15   # sekitar 0.537 -> lebih dari separuh kemungkinan ada "temuan" palsu
 0.05 / 15     # batas Bonferroni = 0.0033; p = 0.03 > 0.0033 -> TIDAK signifikan setelah koreksi
 ```
+interpretasi saya : Menurut saya, peluang setidaknya satu hasil signifikan karena kebetulan adalah 1 − 0,95¹⁵ ≈ 0,537, jadi lebih dari separuh kemungkinan muncul "temuan" palsu. Dengan koreksi Bonferroni, batasnya 0,05/15 ≈ 0,0033, sedangkan p = 0,03 lebih besar, sehingga temuan itu tidak signifikan dan tidak meyakinkan.
 
 ## Kesalahan Umum dalam Uji Hipotesis
 
@@ -658,3 +673,13 @@ Materi ini merangkum konsep dasar uji hipotesis (*fundamentals of hypothesis tes
 - Wasserstein, R. L., & Lazar, N. A. (2016). The ASA Statement on p-Values: Context, Process, and Purpose. *The American Statistician*, 70(2), 129--133.
 - Buku teks pengantar statistika pada bab *Fundamentals of Hypothesis Testing: One-Sample Tests*.
 - Dokumentasi resmi R: `?pnorm`, `?qnorm`, `?p.adjust`, `?polygon` (dapat diakses langsung di R/RStudio).
+
+## Interpretasi Pemahaman Pribadi 
+
+- **Uji hipotesis itu kayak sidang.** Saya anggap dulu "nggak ada efek" (H0) itu benar, terus saya lihat seberapa kagetnya data kalau anggapan itu benar. Kalau datanya terlalu aneh, baru H0 saya tolak.
+- **P-value itu seberapa jarang hasil saya muncul kalau H0 benar.** Di contoh mesin kopi cuma sekitar 1,6%, jadi mesinnya kemungkinan memang bermasalah. Tapi ini bukan peluang H0 benar.
+- **"Gagal menolak H0" nggak sama dengan H0 benar.** Saya paham artinya cuma buktinya belum cukup, bisa jadi karena sampelnya kecil.
+- **Ada dua salah yang mungkin terjadi.** Tipe I itu alarm palsu, Tipe II itu kelolosan. Dari praktikum ini saya jadi tahu cara ngurangin dua-duanya sekaligus ya nambah sampel.
+- **Signifikan belum tentu penting.** Selisih sekecil 0,2 gram bisa "signifikan" kalau sampelnya sangat besar, padahal di dunia nyata nggak ada artinya.
+- **Jangan kebanyakan uji.** Makin banyak hipotesis yang saya uji, makin gampang dapat hasil "signifikan" yang sebenarnya cuma kebetulan.
+- **Cara nulis H0 itu menentukan siapa yang harus membuktikan.** Di kasus TSS, data yang sama bisa kasih kesimpulan beda tergantung rumusannya, jadi saya harus mikirin akibat kesalahannya di dunia nyata dulu.

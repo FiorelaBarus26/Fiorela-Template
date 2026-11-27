@@ -8,12 +8,12 @@ project:
     - assets/epub-reader.js
 
 book:
-  title: "Template Fiorela"
+  title: "Praktikum Pengantar Statistika"
   author: "Fiorela Natanya Barus"
   date: today
   description: "Deskripsi singkat tentang buku"
-  cover-image: images/Cover.png
-  repo-url: https://github.com/pakardata1/ebook-template-quarto.git
+  cover-image: images/cover lala.png
+  repo-url: https://github.com/FiorelaBarus26/Fiorela-Template.git
   repo-actions: [edit, issue]
   sidebar:
     tools:
@@ -27,8 +27,8 @@ book:
         aria-label: Pratinjau EPUB
   chapters:
     - index.qmd
-    - chapters/bab-1.qmd
-    - chapters/bab-2.qmd
+    - chapters/bab-9.qmd
+    - chapters/bab-10.qmd
     - chapters/bab-3.qmd
     - references/referensi.qmd
 

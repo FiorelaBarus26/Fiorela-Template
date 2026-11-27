@@ -1596,6 +1596,11 @@ maknanya}\label{tugas-1-hitung-se-dan-jelaskan-maknanya}
 meleset sekitar 1 gram dari rata-rata sebenarnya -- jauh lebih kecil
 daripada variasi berat antarkemasan (6 gram).
 
+interpretasi saya : SE = 1 gram artinya rata-rata dari 36 kemasan
+biasanya meleset sekitar 1 gram dari rata-rata sebenarnya (μ). Ini jauh
+lebih kecil daripada variasi berat antarkemasan (σ = 6 gram), sehingga
+rata-rata sampel merupakan penduga μ yang presisi.
+
 \subsubsection{\texorpdfstring{Tugas 2: Jika mesin bekerja benar
 (\(\mu\) = 250), berapa peluang rata-rata 36 kemasan kurang dari 248
 gram?}{Tugas 2: Jika mesin bekerja benar (\textbackslash mu = 250), berapa peluang rata-rata 36 kemasan kurang dari 248 gram?}}\label{tugas-2-jika-mesin-bekerja-benar-mu-250-berapa-peluang-rata-rata-36-kemasan-kurang-dari-248-gram}
@@ -1614,6 +1619,16 @@ gram?}{Tugas 2: Jika mesin bekerja benar (\textbackslash mu = 250), berapa pelua
 sekitar 0,0228. Kejadian ini jarang jika mesin bekerja benar -- gagasan
 yang menjadi dasar uji hipotesis di Pertemuan 10.
 
+interpretasi saya : Menurut saya, hasil ini menunjukkan bahwa peluang
+rata-rata 36 kemasan kurang dari 248 gram itu kecil, yaitu sekitar
+0,0228 atau 2,3\%, jika mesin memang bekerja benar (μ = 250). Karena SE
+hanya 1 gram, selisih 2 gram sudah setara dengan 2 SE di bawah
+rata-rata, sehingga kejadian seperti ini tergolong jarang. Jadi, kalau
+di lapangan ternyata rata-rata sampel benar-benar di bawah 248 gram,
+menurut saya wajar untuk mencurigai bahwa mesin tidak bekerja
+sebagaimana mestinya. Cara berpikir inilah yang nanti menjadi dasar uji
+hipotesis di Pertemuan 10.
+
 \subsubsection{\texorpdfstring{Tugas 3: Hitung CI 95\% untuk rata-rata
 berat (\(\sigma\)
 diketahui)}{Tugas 3: Hitung CI 95\% untuk rata-rata berat (\textbackslash sigma diketahui)}}\label{tugas-3-hitung-ci-95-untuk-rata-rata-berat-sigma-diketahui}
@@ -1629,6 +1644,12 @@ diketahui)}{Tugas 3: Hitung CI 95\% untuk rata-rata berat (\textbackslash sigma 
  x_bar  Bawah   Atas 
 247.40 245.44 249.36 
 \end{verbatim}
+
+interpretasi saya : Menurut saya, dengan tingkat kepercayaan 95\%,
+rata-rata berat sebenarnya (μ) berada di antara 245,44 dan 249,36 gram,
+dengan rata-rata sampel 247,40 gram. Karena nilai 250 gram tidak
+termasuk dalam interval ini, ada alasan untuk menduga mesin tidak
+bekerja sesuai target 250 gram.
 
 \subsubsection{\texorpdfstring{Tugas 4: Hitung CI 95\% jika \(\sigma\)
 dianggap tidak diketahui
@@ -1657,6 +1678,12 @@ attr(,"conf.level")
    6.366    2.030    1.960 
 \end{verbatim}
 
+interpretasi saya : Menurut saya, CI 95\% dengan t adalah 245,25 sampai
+249,56 gram, sedikit lebih lebar daripada CI dengan z karena s (6,366)
+lebih besar dari σ (6) dan nilai kritis t (2,030) lebih besar dari z
+(1,960). Karena 250 tetap di luar interval, kesimpulannya tidak berubah:
+mesin kemungkinan tidak bekerja sesuai target.
+
 \subsubsection{Tugas 5: Tafsirkan
 hasilnya}\label{tugas-5-tafsirkan-hasilnya}
 
@@ -1666,6 +1693,13 @@ cukup besar (t kritis hanya sedikit di atas 1,96) dan \(s\) dekat dengan
 memberi indikasi bahwa rata-rata pengisian mesin berbeda dari target --
 yang dapat dikonfirmasi dengan uji hipotesis. Hasil sampel ini: 250
 berada di luar selang z.
+
+interpretasi saya : Menurut saya, selang z (245,44 sampai 249,36) dan
+selang t (245,25 sampai 249,56) sangat mirip karena n = 36 cukup besar,
+sehingga nilai kritis t (2,030) hanya sedikit di atas z (1,960), dan s
+(6,366) dekat dengan σ (6). Karena 250 berada di luar kedua selang, data
+memberi indikasi bahwa rata-rata pengisian mesin berbeda dari target 250
+gram. Dugaan ini masih perlu dikonfirmasi dengan uji hipotesis.
 
 \subsubsection{Tugas 6 (Tantangan): Ukuran
 sampel}\label{tugas-6-tantangan-ukuran-sampel}
@@ -1686,6 +1720,13 @@ gram? Dan ± 0,5 gram?
 
 \textbf{Jawaban}: 139 kemasan untuk ± 1 gram dan 554 kemasan untuk ± 0,5
 gram -- membagi dua margin of error membutuhkan sampel empat kali lipat.
+
+interpretasi saya : Menurut saya, agar margin of error CI 95\% hanya ± 1
+gram dibutuhkan n = (1,96 × 6 / 1)² = 138,3, dibulatkan ke atas menjadi
+139 kemasan. Untuk ± 0,5 gram dibutuhkan n = (1,96 × 6 / 0,5)² = 553,2,
+dibulatkan menjadi 554 kemasan. Jadi membagi dua margin of error
+membutuhkan sampel sekitar empat kali lipat, karena n berbanding
+terbalik dengan kuadrat E.
 
 \subsection{Latihan Tambahan
 (Self-Check)}\label{latihan-tambahan-self-check}
@@ -1710,6 +1751,11 @@ acak 64 panggilan, tentukan mean, SE, dan bentuk distribusi sampling
 [1] 0.09121122
 \end{verbatim}
 
+interpretasi saya : Menurut saya, distribusi sampling x̄ punya mean 8
+menit, SE = 6/√64 = 0,75, dan bentuknya mendekati normal berkat CLT (n =
+64). P(x̄ \textgreater{} 9) = P(Z \textgreater{} 1,33) ≈ 0,0912, jadi
+kejadian ini tidak terlalu jarang.
+
 \textbf{Soal B}. Survei 1.200 pemilih menunjukkan 54\% mendukung sebuah
 kebijakan. Hitung CI 95\% dan margin of error-nya.
 
@@ -1725,6 +1771,10 @@ kebijakan. Hitung CI 95\% dan margin of error-nya.
 \begin{verbatim}
 [1] 0.511801 0.568199
 \end{verbatim}
+
+interpretasi saya : Menurut saya, CI 95\% untuk proporsi pendukung
+adalah 51,2\% sampai 56,8\% (MoE ±2,8 poin). Karena seluruh interval di
+atas 50\%, ada indikasi dukungan mayoritas.
 
 \textbf{Soal C}. Sepuluh pengukuran pH air limbah: 6,8; 7,1; 6,9; 7,4;
 7,0; 6,7; 7,2; 7,3; 6,9; 7,1. Hitung CI 95\% untuk rata-rata pH secara
@@ -1755,6 +1805,10 @@ attr(,"conf.level")
 [1] 0.95
 \end{verbatim}
 
+interpretasi saya : Menurut saya, x̄ = 7,04 dan CI 95\% (t, df = 9)
+adalah 6,885 sampai 7,195. Kita memakai t karena σ tidak diketahui dan n
+kecil. Hasil t.test() akan sama dengan hitungan manual.
+
 \textbf{Soal D}. Sebuah media menulis: ``Dengan CI 95\% {[}62\%,
 68\%{]}, berarti 95\% warga memiliki tingkat kepuasan antara 62\% dan
 68\%.'' Perbaiki tafsiran ini.
@@ -1767,6 +1821,11 @@ attr(,"conf.level")
 \CommentTok{\# bukan rentang nilai individu.}
 \end{Highlighting}
 \end{Shaded}
+
+interpretasi saya : Menurut saya, tafsiran media itu keliru karena CI
+menaksir parameter populasi, bukan rentang nilai individu. Yang benar:
+``Kami 95\% yakin proporsi warga yang puas di seluruh populasi berada
+antara 62\% dan 68\%.''
 
 \section{Kesalahan Umum dalam Sampling Distribution dan
 Estimasi}\label{kesalahan-umum-dalam-sampling-distribution-dan-estimasi}
@@ -3135,6 +3194,11 @@ Lembaga konsumen curiga umur baterai \textbf{kurang} dari yang diklaim.
 \textbf{Jawaban}: \(H_0: \mu \ge 20\) jam (klaim benar);
 \(H_1: \mu < 20\) jam (klaim berlebihan). Uji satu arah kiri.
 
+interpretasi saya : Menurut saya, karena lembaga curiga umur baterai
+kurang dari klaim, H0: μ ≥ 20 jam (klaim benar) dan H1: μ \textless{} 20
+jam (klaim berlebihan). Ini uji satu arah kiri, karena yang dicari hanya
+bukti bahwa umur baterai lebih pendek.
+
 \subsubsection{\texorpdfstring{Tugas 2: Hitung statistik uji, nilai
 kritis, dan p-value (\(\alpha\) =
 0,05)}{Tugas 2: Hitung statistik uji, nilai kritis, dan p-value (\textbackslash alpha = 0,05)}}\label{tugas-2-hitung-statistik-uji-nilai-kritis-dan-p-value-alpha-005}
@@ -3151,6 +3215,11 @@ kritis, dan p-value (\(\alpha\) =
 1 -2.1251  -1.6449 0.01679  Tolak H0
 \end{verbatim}
 
+interpretasi saya : Menurut saya, z = -2,1251 lebih kecil daripada nilai
+kritis -1,6449, dan p-value = 0,01679 lebih kecil dari α = 0,05.
+Artinya, jika klaim 20 jam benar, rata-rata 40 baterai sekecil ini hanya
+muncul sekitar 1,7\% dari waktu, sehingga H0 ditolak.
+
 \subsubsection{Tugas 3: Ambil keputusan dan tuliskan kesimpulan dalam
 konteks}\label{tugas-3-ambil-keputusan-dan-tuliskan-kesimpulan-dalam-konteks}
 
@@ -3158,6 +3227,10 @@ konteks}\label{tugas-3-ambil-keputusan-dan-tuliskan-kesimpulan-dalam-konteks}
 0,01679. Karena p-value kurang dari 0,05, \(H_0\) ditolak: terdapat
 bukti yang cukup bahwa rata-rata umur baterai kurang dari 20 jam seperti
 yang diklaim.
+
+interpretasi saya : Menurut saya, karena p-value (0,01679) \textless{}
+0,05, H0 ditolak. Ada bukti yang cukup bahwa rata-rata umur baterai
+kurang dari 20 jam, jadi klaim produsen tampaknya berlebihan.
 
 \subsubsection{\texorpdfstring{Tugas 4: Bagaimana keputusannya jika
 \(\alpha\) =
@@ -3181,6 +3254,13 @@ ditetapkan \textbf{sebelum} melihat data, dan p-value sebaiknya
 dilaporkan apa adanya agar pembaca dapat menilai sendiri kekuatan
 buktinya.
 
+interpretasi saya : Menurut saya, pada α = 0,01 nilai kritisnya -2,326,
+sedangkan z = -2,1251 tidak melewatinya (p-value 0,01679 \textgreater{}
+0,01), sehingga gagal menolak H0. Bukti yang sama bisa menghasilkan
+keputusan berbeda tergantung α, maka α harus ditetapkan sebelum melihat
+data. Gagal menolak H0 juga tidak berarti klaim terbukti benar, hanya
+buktinya belum cukup kuat.
+
 \subsubsection{Tugas 5: Jelaskan kesalahan Tipe I dan II dalam konteks
 ini}\label{tugas-5-jelaskan-kesalahan-tipe-i-dan-ii-dalam-konteks-ini}
 
@@ -3189,6 +3269,11 @@ berlebihan padahal baterai sebenarnya bertahan rata-rata 20 jam
 (merugikan reputasi produsen). \textbf{Tipe II} -- lembaga menyatakan
 tidak ada bukti klaim berlebihan padahal baterai sebenarnya bertahan
 kurang dari 20 jam (merugikan konsumen).
+
+interpretasi saya : Menurut saya, Tipe I: lembaga menyatakan klaim
+berlebihan padahal baterai sebenarnya rata-rata 20 jam (merugikan
+produsen). Tipe II: lembaga menyatakan tidak ada bukti padahal baterai
+sebenarnya kurang dari 20 jam (merugikan konsumen).
 
 \subsubsection{Tugas 6 (Tantangan): Power dan ukuran
 sampel}\label{tugas-6-tantangan-power-dan-ukuran-sampel}
@@ -3222,6 +3307,10 @@ tentukan \(n\) agar power-nya 90\%.
 \textbf{Jawaban}: dengan 40 unit, selisih 1 jam terdeteksi sekitar 81\%
 dari waktu. Untuk power 90\% dibutuhkan sekitar 54 unit.
 
+interpretasi saya : Menurut saya, dengan 40 unit, uji ini mendeteksi
+selisih 1 jam (μ = 19) sekitar 81\% dari waktu (power = 0,812). Untuk
+power 90\% dibutuhkan sekitar 54 unit.
+
 \subsection{Latihan Tambahan
 (Self-Check)}\label{latihan-tambahan-self-check-1}
 
@@ -3243,6 +3332,12 @@ kadar gula minuman kurang dari 10 g seperti label?
 \CommentTok{\#     Rumusan bergantung pada klaim yang ingin dibuktikan.}
 \end{Highlighting}
 \end{Shaded}
+
+interpretasi saya : Menurut saya: (1) H0: μ = 200 ms vs H1: μ ≠ 200 ms
+(dua arah). (2) H0: μ ≤ 70 vs H1: μ \textgreater{} 70 (kanan). (3) Untuk
+membuktikan label benar: H0: μ ≥ 10 vs H1: μ \textless{} 10 (kiri); jika
+curiga gula melebihi label: H0: μ ≤ 10 vs H1: μ \textgreater{} 10
+(kanan). Rumusan bergantung pada klaim yang ingin dibuktikan.
 
 \textbf{Soal B}. Uji dua arah menghasilkan \(z = 1{,}80\). Hitung
 p-value dan keputusan pada \(\alpha\) = 0,05 dan 0,10. Bagaimana jika
@@ -3269,6 +3364,12 @@ ujinya satu arah kanan?
 [1] 0.03593032
 \end{verbatim}
 
+interpretasi saya : Menurut saya, uji dua arah: p-value = 2 × (1 −
+Φ(1,80)) ≈ 0,0719, sehingga gagal menolak H0 pada α = 0,05 tetapi
+menolak H0 pada α = 0,10. Uji satu arah kanan: p-value ≈ 0,0359,
+sehingga menolak H0 pada α = 0,05, asalkan arah kanan ditetapkan sebelum
+melihat data.
+
 \textbf{Soal C}. Seorang analis melaporkan: ``p-value = 0,23, jadi
 terbukti kampanye iklan tidak berpengaruh terhadap penjualan.'' Kritik
 pernyataan ini.
@@ -3282,6 +3383,12 @@ pernyataan ini.
 \CommentTok{\# yang masih masuk akal.}
 \end{Highlighting}
 \end{Shaded}
+
+interpretasi saya : Menurut saya, pernyataan analis itu keliru. P-value
+0,23 hanya berarti data belum cukup memberi bukti adanya pengaruh (gagal
+menolak H0), bukan bukti bahwa iklan tidak berpengaruh. Bisa jadi
+pengaruhnya kecil dan power uji rendah karena sampel kecil. Sebaiknya
+laporkan juga selang kepercayaan untuk besar efeknya.
 
 \textbf{Soal D}. Sebuah tim menguji 15 variasi warna tombol terhadap
 warna lama, masing-masing dengan \(\alpha\) = 0,05, dan melaporkan satu
@@ -3309,6 +3416,12 @@ Apakah temuan itu meyakinkan dengan koreksi Bonferroni?
 \begin{verbatim}
 [1] 0.003333333
 \end{verbatim}
+
+interpretasi saya : Menurut saya, peluang setidaknya satu hasil
+signifikan karena kebetulan adalah 1 − 0,95¹⁵ ≈ 0,537, jadi lebih dari
+separuh kemungkinan muncul ``temuan'' palsu. Dengan koreksi Bonferroni,
+batasnya 0,05/15 ≈ 0,0033, sedangkan p = 0,03 lebih besar, sehingga
+temuan itu tidak signifikan dan tidak meyakinkan.
 
 \section{Kesalahan Umum dalam Uji
 Hipotesis}\label{kesalahan-umum-dalam-uji-hipotesis}
